@@ -28,7 +28,7 @@ from distutils.dir_util import copy_tree
 from urllib.request import urlretrieve
 
 from mklist.generate import generate_parts_lst
-from pkg_resources import get_distribution, DistributionNotFound
+from pkg_resources import get_distribution, DistributionNotFound, resource_filename
 
 from ldraw.config import get_config, write_config
 from ldraw.dirs import get_data_dir, get_config_dir, get_cache_dir
@@ -174,7 +174,7 @@ def generate(parts_lst, output_dir, force=False):
 
     with open(library__init__, 'w') as library__init__:
         library__init__.write(LIBRARY_INIT)
-    shutil.copy('ldraw-license.txt', os.path.join(library_path, 'license.txt'))
+    shutil.copy(resource_filename(__name__, 'ldraw-license.txt'), os.path.join(library_path, 'license.txt'))
 
     gen_colours(parts, output_dir)
     gen_parts(parts, output_dir)

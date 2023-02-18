@@ -18,10 +18,10 @@ setup(
     author=" David Boddie <david@boddie.org.uk>",
     maintainer="Matthieu Berthomé <rienafairefr@gmail.com>",
     author_email="rienairefr@gmail.com, david@boddie.org.uk",
-    version=os.environ.get("TAG_NAME", os.environ.get("TRAVIS_TAG", "dev")),
+    version=os.environ.get("TAG_NAME", os.environ.get("TRAVIS_TAG", "0.0.dev1")),
     python_requires=">=3.5, <3.9",
     packages=find_packages(),
-    package_data={"ldraw": ["templates/*.mustache"]},
+    package_data={"ldraw": ["templates/*.mustache", "ldraw-license.txt"]},
     use_scm_version=True,
     setup_requires=["setuptools_scm"],
     entry_points={
