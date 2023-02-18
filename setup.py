@@ -8,7 +8,7 @@ from setuptools import find_packages
 
 
 def get_readme():
-    return codecs.open("README.rst", encoding="utf-8").read()
+    return codecs.open("README.md", encoding="utf-8").read()
 
 
 setup(

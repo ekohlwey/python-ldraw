@@ -1,4 +1,4 @@
-include README.rst
+include README.md
 include COPYING
 include ldraw/ldraw-license.txt
 recursive-include ldraw/templates *
