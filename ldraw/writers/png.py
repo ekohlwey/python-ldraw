@@ -49,14 +49,12 @@ class PNGWriter(Writer):
     Renders a LDR model into a PNG
     """
 
-    # pylint: disable=too-few-public-methods
-    def write(self, model, png_path, png_args):
+    def render(self, model, png_args):
         """
-        Writes the model's polygons to the provided PNG file
+        Writes the model's polygons to an image buffer.
 
         :param model: LDR model
         :type model: Part
-        :param png_path: where to output the PNG
         :param png_args: Arguments for the rendering (distance, etc.)
         :type png_args: PNGArgs
 
@@ -86,7 +84,22 @@ class PNGWriter(Writer):
             if polygon.alpha < 1.0:
                 polygon.project(distance)
                 polygon.render(image, depth, viewport_scale, stroke_colour)
-        image.save(png_path)
+        return image
+
+    # pylint: disable=too-few-public-methods
+    def write(self, model, png_path, png_args):
+        """
+        Writes the model's polygons to the provided PNG file
+
+        :param model: LDR model
+        :type model: Part
+        :param png_path: where to output the PNG
+        :param png_args: Arguments for the rendering (distance, etc.)
+        :type png_args: PNGArgs
+
+        :return:
+        """
+        self.render(model, png_args).save(png_path)
 
     def _get_polygon(self, top_level_piece, colour, projections):
         rgb = self.parts.colours.get(colour, "#ffffff")
