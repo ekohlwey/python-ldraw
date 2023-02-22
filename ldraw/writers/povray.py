@@ -57,9 +57,9 @@ object {
 }
 """
 
-POV_FORMAT_STRING_TRIANGLE = "  <%1.3f, %1.3f, %1.3f>, " \
-                             "<%1.3f, %1.3f, %1.3f>, " \
-                             "<%1.3f, %1.3f, %1.3f>\n"
+POV_FORMAT_STRING_TRIANGLE = "  <%1.3f, %1.3f, %1.3f>, <%1.3f, %1.3f, %1.3f>, \n" \
+                             "<%1.3f, %1.3f, %1.3f>, <%1.3f, %1.3f, %1.3f>, \n" \
+                             "<%1.3f, %1.3f, %1.3f>, <%1.3f, %1.3f, %1.3f> \n"
 
 POV_FORMAT_STRING = """matrix <%1.3f, %1.3f, %1.3f,
 %1.3f, %1.3f, %1.3f,
@@ -195,11 +195,11 @@ class POVRayWriter(object):
                               max(self.maximum.y, -vectors[0].y, -vectors[1].y, -vectors[2].y),
                               max(self.maximum.z, vectors[0].z, vectors[1].z, vectors[2].z))
         triangle = (
-            vectors[0].x, vectors[0].y, vectors[0].z,
-            vectors[1].x, vectors[1].y, vectors[1].z,
-            vectors[2].x, vectors[2].y, vectors[2].z
+            vectors[0].x, vectors[0].y, vectors[0].z, vectors[0].x, vectors[0].y, vectors[0].z,
+            vectors[1].x, vectors[1].y, vectors[1].z, vectors[1].x, vectors[1].y, vectors[1].z,
+            vectors[2].x, vectors[2].y, vectors[2].z, vectors[2].x, vectors[2].y, vectors[2].z
         )
-        lines = ["triangle", "{", POV_FORMAT_STRING_TRIANGLE % triangle]
+        lines = ["smooth_triangle", "{", POV_FORMAT_STRING_TRIANGLE % triangle]
         self.pov_file.write("\n".join(indent * " " + x for x in lines))
         self._write_colour(colour, indent + 2)
         self.pov_file.write(" " * indent + "}\n\n")
